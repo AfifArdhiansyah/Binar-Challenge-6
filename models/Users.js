@@ -30,7 +30,9 @@ module.exports = (sequelize, DataTypes) => {
         tableName: 'users'
       });
     User.associate = function(models) {
-        // associations can be defined here
+      User.hasMany(models.Car, { as:'createdByUser', foreignKey: 'createdBy'});
+      User.hasMany(models.Car, { as:'editedByUser' ,foreignKey: 'editedBy'});
+      User.hasMany(models.Car, { as:'deletedByUser' ,foreignKey: 'deletedBy'});
     };
     return User;
 };
