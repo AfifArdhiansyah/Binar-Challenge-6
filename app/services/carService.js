@@ -25,8 +25,7 @@ module.exports = {
     async create(name, createdBy) {
         try{
             const car = await carRepository.create(name, createdBy);
-            const user = await userRepository.findByPk(createdBy);            
-            console.log('Check car 2', car);
+            const user = await userRepository.findByPk(createdBy);
             return {car, user};
         }
         catch(err) {
@@ -36,9 +35,17 @@ module.exports = {
 
     async update(id, name, editedBy) {
         try{
-            const car = await carRepository.update(id, name, editedBy);
-            const user = await userRepository.findByPk(editedBy);
-            return {car, user};
+            const isDeleted = await carRepository.isDeleted(id);
+            if(!isDeleted.dataValues.deleted){
+                const car = await carRepository.update(id, name, editedBy);
+                const user = await userRepository.findByPk(editedBy);
+                return {car, user};
+            }
+            else{
+                const car = null;
+                const user = null;
+                return {car, user};
+            }
         }
         catch(err) {
             throw err;

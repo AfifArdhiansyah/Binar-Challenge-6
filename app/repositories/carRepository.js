@@ -32,7 +32,7 @@ module.exports = {
 
     findByPk(role, id) {
         if(role == 'superadmin' || role == 'admin'){
-            return Car.findByPk(id, {
+            return Car.findOne({
                 attributes: ['id', 'name'],
                 include: [
                     {
@@ -46,12 +46,18 @@ module.exports = {
                         attributes: ['username'],
                     },
                 ],
-                where: {deleted: false},
+                where: {
+                    id: id,
+                    deleted: false
+                },
             });
         }
         else if(role == 'member'){
-            return Car.findByPk(id, {
+            return Car.findOne({
                 attributes: ['id', 'name'],
+                where:{
+                    id: id,
+                }
             });
         }
         else{
@@ -70,9 +76,6 @@ module.exports = {
         return Car.create({
             name : name,
             createdBy : createdBy,
-            editedBy : null,
-            deleted : false,
-            deletedBy : null,
         });
     },
 
@@ -82,7 +85,8 @@ module.exports = {
             editedBy
         }, {
             where: {
-                id
+                id: id,
+                deleted: false
             }
         });
     },
@@ -93,8 +97,15 @@ module.exports = {
             deletedBy
         }, {
             where: {
-                id
+                id: id,
+                deleted: false
             }
+        });
+    },
+
+    isDeleted(id) {
+        return Car.findByPk(id, {
+            attributes: ['deleted']
         });
     }
 }

@@ -21,7 +21,8 @@ module.exports = {
         if(req.session.user){
             const car = carService.findByPk(req.session.user.role, id)
             .then(car => {
-                res.status(200).json(car);
+                if(car) res.status(200).json(car);
+                else res.status(404).json({message: 'Car not found'});
             })
             .catch(err => {
                 res.status(500).json(err);
@@ -36,7 +37,6 @@ module.exports = {
         if(req.session.user && (req.session.user.role == 'superadmin' || req.session.user.role == 'admin')){
             const {name} = req.body;
             const {car, user} = await carService.create(name, req.session.user.id);
-            console.log('Check car', car);
             res.status(200).json({
                 status: "SUCCESS",
                 message: "Car created successfully!",
@@ -59,15 +59,22 @@ module.exports = {
             const id = req.params.id;
             const {name} = req.body;
             const {car, user} = await carService.update(id, name, req.session.user.id);
-            res.status(200).json({
-                status: "SUCCESS",
-                message: "Car updated successfully!",
-                data: {
-                    id: car.id,
-                    name: car.name,
-                    editedBy: user.username,
-                }
-            });
+            if(car){
+                res.status(200).json({
+                    status: "SUCCESS",
+                    message: "Car updated successfully!",
+                    data: {
+                        id: car.id,
+                        name: car.name,
+                        editedBy: user.username,
+                    }
+                });
+            }
+            else{
+                res.status(404).json({
+                    message: "Car not found",
+                });
+            }
         }
         else{
             res.status(401).json({

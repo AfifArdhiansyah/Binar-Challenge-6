@@ -180,7 +180,6 @@ module.exports = {
     checkRole(req, res){
         if(req.session.user){
           const role = req.session.user.role;
-          console.log('check session', req.session);
           if(role == "superadmin"){
               res.status(200).json({message : "You are superadmin"});
           }
