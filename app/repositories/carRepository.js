@@ -17,7 +17,8 @@ module.exports = {
                         as: 'editedByUser',
                         attributes: ['username'],
                     },
-                ],                
+                ],
+                order: [['id', 'ASC']],                
             });
         }
         else if(role == 'member'){

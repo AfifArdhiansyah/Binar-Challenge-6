@@ -278,7 +278,12 @@
               "headers": {}
             }
           },
-          "deprecated": false
+          "deprecated": false,
+          "security": [
+            {
+              "bearer": []
+            }
+          ]
         }
       },
       "/newCar": {
