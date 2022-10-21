@@ -14,7 +14,7 @@ module.exports = {
     */
      await queryInterface.bulkInsert('users', [{
         username: 'SuperAdmin',
-        password: '123456',
+        password: '$2a$10$lrQYOn2Cq8hlMhjQ7o2aheUGmdYbmOSQKgBnKC7dKNa7OF9LVOC2y', // 123456
         role: 'superadmin',
         createdAt: new Date(),
         updatedAt: new Date()

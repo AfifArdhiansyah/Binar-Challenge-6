@@ -21,6 +21,11 @@ router.get(
     controllers.api.v1.userController.authorize,
     controllers.api.v1.userController.whoami
 )
+router.get(
+    prefix +'/checkToken', 
+    controllers.api.v1.userController.authorizeInputToken,
+    controllers.api.v1.userController.checkUser
+)
 
 //car api
 router.get(prefix +'/cars', controllers.api.v1.userController.authorize, controllers.api.v1.carController.getAllCars);
