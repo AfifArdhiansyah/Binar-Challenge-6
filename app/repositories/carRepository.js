@@ -5,6 +5,7 @@ module.exports = {
         if(role == 'superadmin' || role == 'admin'){
             return Car.findAll({
                 attributes: ['id', 'name'],
+                where: {deleted: false},
                 include: [
                     {
                         model: User,
@@ -16,8 +17,7 @@ module.exports = {
                         as: 'editedByUser',
                         attributes: ['username'],
                     },
-                ],
-                where: {deleted: false},
+                ],                
             });
         }
         else if(role == 'member'){
@@ -106,6 +106,30 @@ module.exports = {
     isDeleted(id) {
         return Car.findByPk(id, {
             attributes: ['deleted']
+        });
+    },
+
+    getDeletedCars(){
+        return Car.findAll({
+            attributes: ['id', 'name'],
+            include: [
+                {
+                    model: User,
+                    as: 'createdByUser',
+                    attributes: ['username'],
+                },
+                {
+                    model: User,
+                    as: 'editedByUser',
+                    attributes: ['username'],
+                },
+                {
+                    model: User,
+                    as: 'deletedByUser',
+                    attributes: ['username'],
+                }
+            ],
+            where: {deleted: true},
         });
     }
 }

@@ -135,7 +135,7 @@ module.exports = {
 
     whoami(req, res) {
         if(req.session.isAuthenticated){
-            res.status(200).json(req.user);
+            res.status(200).json(req.session.user);
         }
         else{
             res.status(401).json({message : "Unauthorized"});
@@ -144,8 +144,9 @@ module.exports = {
 
     async authorize(req, res, next) {
         try {
-          const bearerToken = req.headers.authorization;
-          const token = bearerToken.split("Bearer ")[1];
+          // const bearerToken = req.headers.authorization;
+          const token = req.session.token;
+          // const token = bearerToken.split("Bearer ")[1];
           const tokenPayload = jwt.verify(
             token,
             process.env.JWT_SIGNATURE_KEY || "Rahasia"
@@ -175,28 +176,6 @@ module.exports = {
           });
         }
         
-    },
-
-    checkRole(req, res){
-        if(req.session.user){
-          const role = req.session.user.role;
-          if(role == "superadmin"){
-              res.status(200).json({message : "You are superadmin"});
-          }
-          else if(role == "admin"){
-              res.status(200).json({message : "You are admin"});
-          }
-          else if(role == "member"){
-              res.status(200).json({message : "You are member"});
-          }
-          else{
-              res.status(200).json({message : "You are nobody"});
-          }
-        }
-        else{
-          res.status(401).json({message : "Unauthorized"});
-        }
-            
     },
 
     async newAdmin(req, res) {

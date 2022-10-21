@@ -2,6 +2,12 @@ const express = require('express');
 const app = express();
 const router = require('../config/routes');
 const session = require('express-session');
+const swaggerJSDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
+const apiDocumentation = require('./api-docs.json')
+
+/** Swagger */
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(apiDocumentation));
 
 /** Install JSON request parser */
 app.use(express.json());

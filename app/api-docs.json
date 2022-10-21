@@ -1,0 +1,505 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Binar Challenge Chapter 6 API",
+      "contact": {},
+      "version": "1.0"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:8000/api/v1",
+        "variables": {}
+      }
+    ],
+    "paths": {
+      "/users": {
+        "get": {
+          "tags": [
+            "Misc"
+          ],
+          "summary": "Get All Users",
+          "operationId": "GetAllUsers",
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/users/{id}": {
+        "get": {
+          "tags": [
+            "Misc"
+          ],
+          "summary": "Get All Users",
+          "operationId": "GetAllUsers",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "",
+              "required": true,
+              "style": "form",
+              "explode": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32",
+                "example": 3
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/register": {
+        "post": {
+          "tags": [
+            "Misc"
+          ],
+          "summary": "Register",
+          "operationId": "Register",
+          "requestBody": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/RegisterRequest"
+                    },
+                    {
+                      "example": {
+                        "username": "Fuad",
+                        "password": "123456"
+                      }
+                    }
+                  ]
+                },
+                "example": {
+                  "username": "Fuad",
+                  "password": "123456"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/login": {
+        "post": {
+          "tags": [
+            "Misc"
+          ],
+          "summary": "Login",
+          "operationId": "Login",
+          "requestBody": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/LoginRequest"
+                    },
+                    {
+                      "example": {
+                        "username": "Admin2",
+                        "password": "admin2"
+                      }
+                    }
+                  ]
+                },
+                "example": {
+                  "username": "Admin2",
+                  "password": "admin2"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/whoami": {
+        "get": {
+          "tags": [
+            "Misc"
+          ],
+          "summary": "Who Am I",
+          "operationId": "WhoAmI",
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false,
+          "security": [
+            {
+              "bearer": []
+            }
+          ]
+        }
+      },
+      "/logout": {
+        "delete": {
+          "tags": [
+            "Misc"
+          ],
+          "summary": "Logout",
+          "operationId": "Logout",
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false,
+          "security": [
+            {
+              "bearer": []
+            }
+          ]
+        }
+      },
+      "/newAdmin": {
+        "post": {
+          "tags": [
+            "Misc"
+          ],
+          "summary": "New Admin",
+          "operationId": "NewAdmin",
+          "requestBody": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/NewAdminRequest"
+                    },
+                    {
+                      "example": {
+                        "username": "Admin3",
+                        "password": "admin3"
+                      }
+                    }
+                  ]
+                },
+                "example": {
+                  "username": "Admin3",
+                  "password": "admin3"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false,
+          "security": [
+            {
+              "bearer": []
+            }
+          ]
+        }
+      },
+      "/cars": {
+        "get": {
+          "tags": [
+            "Misc"
+          ],
+          "summary": "Get All Cars",
+          "operationId": "GetAllCars",
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false,
+          "security": [
+            {
+              "bearer": []
+            }
+          ]
+        }
+      },
+      "/newCar": {
+        "post": {
+          "tags": [
+            "Misc"
+          ],
+          "summary": "New Car",
+          "operationId": "NewCar",
+          "requestBody": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/NewCarRequest"
+                    },
+                    {
+                      "example": {
+                        "name": "jazz"
+                      }
+                    }
+                  ]
+                },
+                "example": {
+                  "name": "jazz"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false,
+          "security": [
+            {
+              "bearer": []
+            }
+          ]
+        }
+      },
+      "/editCar/{id}": {
+        "put": {
+          "tags": [
+            "Misc"
+          ],
+          "summary": "Edit Car",
+          "operationId": "EditCar",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "",
+              "required": true,
+              "style": "form",
+              "explode": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32",
+                "example": 3
+              }
+            }
+          ],
+          "requestBody": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/EditCarRequest"
+                    },
+                    {
+                      "example": {
+                        "name": "Innova Edited"
+                      }
+                    }
+                  ]
+                },
+                "example": {
+                  "name": "Innova Edited"
+                }
+              }
+            },
+            "required": true,
+            "security": [
+                {
+                  "bearer": []
+                }
+              ]
+          },
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false,
+          "security": [
+            {
+              "bearer": []
+            }
+          ]
+        }
+      },
+      "/deleteCar/{id}": {
+        "delete": {
+          "tags": [
+            "Misc"
+          ],
+          "summary": "Delete Car",
+          "operationId": "DeleteCar",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "",
+              "required": true,
+              "style": "form",
+              "explode": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32",
+                "example": 4
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false,
+          "security": [
+            {
+              "bearer": []
+            }
+          ]
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "RegisterRequest": {
+          "title": "RegisterRequest",
+          "required": [
+            "username",
+            "password"
+          ],
+          "type": "object",
+          "properties": {
+            "username": {
+              "type": "string"
+            },
+            "password": {
+              "type": "string"
+            }
+          },
+          "example": {
+            "username": "Fuad",
+            "password": "123456"
+          }
+        },
+        "LoginRequest": {
+          "title": "LoginRequest",
+          "required": [
+            "username",
+            "password"
+          ],
+          "type": "object",
+          "properties": {
+            "username": {
+              "type": "string"
+            },
+            "password": {
+              "type": "string"
+            }
+          },
+          "example": {
+            "username": "Admin2",
+            "password": "admin2"
+          }
+        },
+        "NewAdminRequest": {
+          "title": "NewAdminRequest",
+          "required": [
+            "username",
+            "password"
+          ],
+          "type": "object",
+          "properties": {
+            "username": {
+              "type": "string"
+            },
+            "password": {
+              "type": "string"
+            }
+          },
+          "example": {
+            "username": "Admin3",
+            "password": "admin3"
+          }
+        },
+        "NewCarRequest": {
+          "title": "NewCarRequest",
+          "required": [
+            "name"
+          ],
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            }
+          },
+          "example": {
+            "name": "jazz"
+          }
+        },
+        "EditCarRequest": {
+          "title": "EditCarRequest",
+          "required": [
+            "name"
+          ],
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            }
+          },
+          "example": {
+            "name": "Jazz Edited"
+          }
+        }
+      },
+      "securitySchemes": {
+        "bearer": {
+          "type": "http",
+          "scheme": "bearer"
+        }
+      }
+    },
+    "security": [],
+    "tags": [
+      {
+        "name": "Misc",
+        "description": ""
+      }
+    ]
+  }

@@ -62,4 +62,14 @@ module.exports = {
             throw err;
         }
     },
+
+    async getDeletedCars(){
+        try{
+            const cars = await carRepository.getDeletedCars();
+            return cars;
+        }
+        catch(err) {
+            throw err;
+        }
+    }
 }

@@ -102,5 +102,30 @@ module.exports = {
                 message: "Unauthorized",
             });
         }
+    },
+
+    async getDeletedCars(req, res) {
+        if(req.session.user && (req.session.user.role == 'superadmin' || req.session.user.role == 'admin')){
+            const cars = await carService.getDeletedCars();
+            if(cars){
+                res.status(200).json({
+                    status: "SUCCESS",
+                    message: "Car fetched successfully!",
+                    data: {
+                        cars
+                    }
+                });
+            }
+            else{
+                res.status(404).json({
+                    message: "Car not found",
+                });
+            }
+        }
+        else{
+            res.status(401).json({
+                message: "Unauthorized",
+            });
+        }
     }
 }
