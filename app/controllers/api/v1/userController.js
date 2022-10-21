@@ -33,7 +33,6 @@ function generateToken(payload) {
     const token = jwt.sign({
       payload
     }, process.env.JWT_SECRET || 'Rahasia', {
-      expiresIn: '300s'
     });
     return token;
 }
